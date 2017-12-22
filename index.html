@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+    <script src="./myjquery.js"></script>
+    <script src="./myscript.js"></script>
+</head>
+<body>
+<!--Clock image up top-->
+<img src="./Site_Assets/TTC_clock.svg" height="26" width="26" style="margin-top: 17%; margin-bottom: 0.5%;">
+<!--Header-->
+<h1>FIND YOUR STREETCAR WAIT TIME</h1>
+
+<!--Here's the input for the form-->
+<form name="streetcarForm" action="" onsubmit="return false" method="get">
+<div class="resizing-input">	
+	<span id="the"></span><input id="enterstop" onsubmit="talktoAPI(); return false" type="text" name="myStreetcar" placeholder="Enter your stop here." /><span style="display:none" class="space"></span><span id="streetcarWaitTime"></span>
+</div>	
+<input type="image" onclick="talktoAPI(); return false" src="./Site_Assets/arrow/right.svg" width="25px" style="visibility: hidden;">
+</form>
+
+<!--Will be adding a link to the portfolio site here-->
+<p style="margin-top: 5%;">SYNC YOUR DEVICE</p>
+
+</body>

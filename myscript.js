@@ -1,46 +1,106 @@
-//Start the full function, and declare the variables we'll be using within.
+function hideAll(){
+document.getElementById("extraThe").style.display = "none";
+document.getElementById("extraAt").style.display = "none";
+document.getElementById("stop").style.display = "none";
+document.getElementById("extraArrive").style.display = "none";
+document.getElementById("waitTimes").style.display = "none";
+document.getElementById("stop").value = "";
+};
 
-function talktoAPI(){
-	var waitTime = document.getElementById("streetcarWaitTime");
-	var response = document.getElementById("streetcarWaitTime");
-	var addthe = document.getElementById("the");
-	var input = document.getElementById("enterstop").value;
+//Input a Route and get a Stop
 
-//validate form
-  	if (input == "") {
-    alert("You must enter a stop name.");
+function enterRoute(){
+var route = document.getElementById("route").value;
+
+document.getElementById("extraThe").style.display = "inline";
+document.getElementById("extraAt").style.display = "inline";
+document.getElementById("stop").style.display = "inline";
+
+if (route == "") {
+    alert("You must fill out the fields.");
     return false;}
 
-//This GETs the data from the API in JSON format.
-//I need to figure out how to call specific details based on input.
-
-
 var ourRequest = new XMLHttpRequest();
-ourRequest.open('GET', 'https://nameless-tundra-18596.herokuapp.com/schedule' + '?station=' + input);
+ourRequest.open('GET', 'https://nameless-tundra-18596.herokuapp.com/stops?route=' + route);
 ourRequest.onload = function(){
 	var ourData = JSON.parse(ourRequest.responseText);
-	console.log("The database is reading some streetcar info: ")
 	console.log(ourData);
-	console.log("Will arrive in: " + ourData.time);
+	localStorage.setItem('savedStops', JSON.stringify(ourData));
+	var objectKeys = Object.keys(ourData);
+    var stopOptions = '';
+	objectKeys.forEach(function(stop){
+		console.log(ourData[stop].title);
+		stopOptions += '<option value="'+ ourData[stop].title +'" />';
+		document.getElementById('stop_list').innerHTML = stopOptions;
+	});
+//Update the Stops datalist
 
-//Set a data point for the wait time to display	
-	var currentWaitTime = (ourData.next_bus);
-
-//Pass that data to the functions
-	getWaitTime(currentWaitTime);
+    console.log(document.getElementById('stop_list'));
 	};
+
+
 ourRequest.send();
 
-//This returns the wait time.
 
-	function getWaitTime(data){
-    	waitTime.innerHTML = " streetcar arrives in " + data + " minutes.";
-    	addthe.innerHTML = "The ";
-    	console.log("I logged the output");
+
+};
+
+function getWaitTime(data){
+
+		var waitTimes = document.getElementById("waitTimes");
+    	waitTimes.innerHTML = " " + data + " minutes.";
+
 }
 
-//Call the append and get functions as part of the parent function.
 
-	getWaitTime();
+//Input a Stop and return the wait times
+
+function enterStop(){
+
+	var enteredStop = document.getElementById("stop").value;
+	var enteredRoute = document.getElementById("route").value;
+	var stopUniqueId = [];
+
+	var ourData = JSON.parse(localStorage.getItem("savedStops"));
+	var objectKeys = Object.keys(ourData);
+	objectKeys.forEach(function(stop){
+		if(ourData[stop].title == enteredStop){
+			stopUniqueId.push(ourData[stop].stopId);
+			console.log(ourData[stop].stopId);
+		};
+	});
+
+	//localStorage.setItem('stopToStore', stopUniqueId);
+	//localStorage.setItem('routeToStore', route);
+
+	document.getElementById("extraArrive").style.display = "inline";
+	document.getElementById("waitTimes").style.display = "inline";
+
+if (route == "" || stop == "") {
+    alert("You must fill out the fields.");
+    return false;
+};
+
+	stopURL = 'https://nameless-tundra-18596.herokuapp.com/predict?stops=' + stopUniqueId[0];
+	if (stopUniqueId.length > 1) {
+		for (var i = 1; i < stopUniqueId.length; i++) {
+			stopURL = stopURL + '&stops=' + stopUniqueId[i];
+		};
+	};
+
+	var ourRequest = new XMLHttpRequest();
+	ourRequest.open('GET', stopURL);
+	ourRequest.onload = function(){
+	var returnedTimes = JSON.parse(ourRequest.responseText);
+//Log it all
+	console.log(returnedTimes);
+
+// Pass that data to the getWaitTime function
+	getWaitTime(returnedTimes[0]);
+
+	};
+
+
+	ourRequest.send();
 
 };

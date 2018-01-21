@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+    <script src="./mypost.js"></script>
+    <script src="./flexinputs.js"></script>
+</head>
+<body>
+
+    <form id="deviceSync" action="" onsubmit="saveDeviceID(); return false" method="post">
+            
+        <span class="resizing-input">
+            <input id="deviceID" type="text" placeholder="Enter your device #ID." onsubmit="return false"></input><span style="display:none" class="space"></span>
+        </span>
+
+            <input type="button" style="display: none" onsubmit="return false" />
+
+    </form>
+
+    <div id="toHome">
+        <a href="./index.html">Find Streetcar Info</a>
+    </div>
+
+</body>

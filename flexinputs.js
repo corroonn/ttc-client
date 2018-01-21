@@ -8,7 +8,7 @@ $(document).ready(function () {
         if (!text.trim()) {
             text = $this.attr('placeholder').trim();
         }
-        var $span = $this.parent().find('.space');
+        var $span = $this.parent().find('span');
         $span.text(text);
         var $inputSize = $span.width();
         $this.css("width", $inputSize);

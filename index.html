@@ -8,35 +8,27 @@
     <script src="./autofill_validate.js"></script>
 </head>
 <body onload="hideAll()">
-
     <form id="routeForm" name="streetcarForm" action="" onsubmit="enterRoute(); validateForm(); return false" method="get">
-			<span id="extraThe">The </span>
-            
+        <span id="extraThe">The </span>
         <span class="resizing-input">
-            <input id="route" type="text" placeholder="enter your streetcar here" onfocus="hideAll()" onsubmit="enterRoute(); return false" list="route_list"></input><span style="display:none" class="space"></span>
-                    <datalist id="route_list">
-                    </datalist>
+            <input id="route" type="text" placeholder="enter your streetcar here" onfocus="hideAll()" onsubmit="enterRoute(); return false" list="route_list"></input>
+            <span style="display:none" class="space"></span>
+            <datalist id="route_list"></datalist>
         </span>
-
-            <input type="button" style="display: none" onsubmit="enterRoute(); return false" />
+        <input type="button" style="display: none" onsubmit="enterRoute(); return false" />
     </form>
-
     <form id="stopForm" name="streetcarFormTwo" action="" onsubmit="enterStop(); validateStopForm(); return false" method="get">
-            <span id="extraAt"> at </span>
-
+        <span id="extraAt"> at </span>
         <span class="resizing-input">
-            <input id="stop" type="text" placeholder="enter your stop here." onsubmit="enterStop(); return false" list="stop_list" /> <span style="display:none" class="space"></span>
-                    <datalist id="stop_list">
-                    </datalist>
+            <input id="stop" type="text" placeholder="enter your stop here." onsubmit="enterStop(); return false" list="stop_list" />
+            <span style="display:none" class="space"></span>
+            <datalist id="stop_list"></datalist>
         </span>
-            <span id="extraArrive"> will arrive in </span>
-            <span id="waitTimes"></span>
-            <input type="button" style="display: none" onsubmit="enterStop(); return false" />
-          
+        <span id="extraArrive"> will arrive in </span>
+        <span id="waitTimes"></span>
+        <input type="button" style="display: none" onsubmit="enterStop(); return false" />
     </form>
-
-    <div id="toDeviceID">
+    <!-- <div id="toDeviceID">
         <a href="./devicesync.html">Sync a Device</a>
-    </div>
-
+    </div> -->
 </body>

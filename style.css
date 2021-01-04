@@ -1,21 +1,20 @@
 form {
-	padding-top: 20%;
-	display: inline-block;
+  padding-top: 20%;
+  display: inline-block;
 }
 
 body {
-	text-align: center;
-
+  text-align: center;
 }
 
-.resizing-input input, .resizing-input span {
-	font-size: 12px;
-    font-family: Sans-serif;
-    white-space: pre;
-    padding: 5px;
+.resizing-input input,
+.resizing-input span {
+  font-size: 12px;
+  font-family: Sans-serif;
+  white-space: pre;
+  padding: 5px;
 }
 
 input::-webkit-calendar-picker-indicator {
-    display: none;
-
+  display: none;
 }
